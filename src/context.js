@@ -2,12 +2,28 @@ import React, {Component} from 'react';
 import axios from 'axios';
 const Context = React.createContext();
 
+// eslint-disable-next-line no-undef
+const reducer = (state, action) => {
+    switch(action.type){
+        case 'SEARCH_TRACKS':
+        return{
+            ...state,
+            track_list: action.payload,
+            heading: 'Search Results'
+        }; 
+        default:
+        return state;
+    }
+}
+
 export class Provider extends Component{
 
     state = {
         track_list: [],
 
-        heading: "Top 10 tracks"
+        heading: "Top 10 tracks",
+        // eslint-disable-next-line no-undef
+        dispatch:action => this.setState(state => reducer(state,action))
     };
 
 componentDidMount(){
